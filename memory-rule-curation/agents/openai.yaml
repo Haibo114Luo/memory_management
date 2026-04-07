@@ -1,0 +1,4 @@
+interface:
+  display_name: "Memory Rule Curation"
+  short_description: "Curate memory writes, preserve global layers, and add task-specific project memory when needed."
+  default_prompt: "Use $memory-rule-curation to decide what should be remembered, preserve the global memory layers, and create task-specific project memory only when needed."
