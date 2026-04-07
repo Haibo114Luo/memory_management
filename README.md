@@ -30,6 +30,22 @@
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
   提供 UI 侧的显示名称、简介和默认 prompt。
 
+### 冲突与修复说明
+
+这个 skill 曾经暴露出一次与运行时发现机制有关的路径冲突：真实目录始终位于 `D:\CodexData\skills\memory-rule-curation`，但运行时一度把它暴露成了错误路径 `C:\Users\UserName\.codex\superpowers\skills\memory-rule-curation\SKILL.md`。
+
+这里最重要的事实边界是：
+
+- `memory-rule-curation` 不是一开始就创建在 `superpowers` 子目录里。
+- `C:\Users\UserName\.codex\superpowers\skills\memory-rule-curation` 这个 junction 是排障时后加进去的兼容补丁，不是冲突的根因。
+- 根据调试记录，能确认的根因边界只是“运行时 / 会话层暴露了错误路径”，而不是某个已定位、可编辑的本地注册表项。
+
+这个问题的完整前因后果、调查过程、根因判断边界、兼容修复和后续清理步骤已经单独写入：
+
+- [`CONFLICT.md`](./CONFLICT.md)
+
+当前公开文档采用匿名化路径示例，并以 `UserName` 代替真实用户名。
+
 ### 下载与使用说明
 
 你可以直接下载整个仓库，或者只取 `memory-rule-curation/` 目录下的 skill 内容。
@@ -48,6 +64,8 @@
 
 - 这个 skill 已经适合我自己的环境中使用和继续迭代。
 - 它已发布到 GitHub 以便版本管理和分享。
+- 路径冲突问题已有文档化记录和修复说明，见 [`CONFLICT.md`](./CONFLICT.md)。
+- 公开文档中的个人用户名已统一匿名化为 `UserName`。
 - 它还没有被彻底泛化成“别人安装后即可直接使用”的通用版本。
 
 ## English
@@ -80,6 +98,22 @@ This skill is implemented through the following files:
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
   Provides UI-facing metadata such as display name, short description, and default prompt.
 
+### Conflict and remediation note
+
+This skill previously exposed a runtime discovery-path conflict. The real skill directory always lived at `D:\CodexData\skills\memory-rule-curation`, but the runtime temporarily surfaced the wrong path `C:\Users\UserName\.codex\superpowers\skills\memory-rule-curation\SKILL.md`.
+
+The important fact boundaries are:
+
+- `memory-rule-curation` was not originally created inside the `superpowers` tree.
+- The junction at `C:\Users\UserName\.codex\superpowers\skills\memory-rule-curation` was added later as a compatibility repair during debugging, not as the original cause.
+- Based on the recorded investigation, the confirmed root-cause boundary is only that an opaque runtime / session discovery layer surfaced the wrong path. No editable local registration record was found and tied to that behavior.
+
+The full timeline, investigation details, root-cause boundary, compatibility repair, and later cleanup are documented separately in:
+
+- [`CONFLICT.md`](./CONFLICT.md)
+
+Public documentation in this repository now uses anonymized path examples and replaces the real username with `UserName`.
+
 ### Download and adaptation
 
 You can download the whole repository or just take the contents under `memory-rule-curation/`.
@@ -98,4 +132,6 @@ If your Agent app root is not a Windows path, or if your directory layout differ
 
 - This skill is ready for use and further iteration in my own environment.
 - It is published to GitHub for versioning and sharing.
+- The path-conflict issue now has a written incident record and remediation note in [`CONFLICT.md`](./CONFLICT.md).
+- Public-facing documentation now anonymizes the personal username as `UserName`.
 - It has not yet been fully generalized into a plug-and-play skill for other users.

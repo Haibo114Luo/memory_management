@@ -23,6 +23,7 @@ Use this skill to decide what should be remembered, how it should be remembered,
 - Treat `D:\CodexData\memories\short_term_memory` as an inbox for candidate rules and temporary memory-management notes. It is not a default authoritative source.
 - Treat `D:\CodexData\memories\rules` as curated operational guidance that can be loaded for relevant tasks.
 - Treat `D:\CodexData\memories\long_term_memory` as archival reference material that is only searched when the user explicitly asks to recall or search memory.
+- When this skill writes to `short_term_memory`, `long_term_memory`, `rules`, or `AGENTS.md`, write the file content in English. If the source material is in another language, translate or paraphrase it into concise English instead of copying non-English prose into the write target.
 - Preserve the existing global layers as-is. Only add a `task-specific` layer when the memory is local to the current Codex conversation's project and should not become machine-wide guidance.
 - Do not use `D:\CodexData\rules\default.rules` for memory or instruction curation. That path is reserved for other runtime rule machinery.
 - Default to explicit-signal triggering: use this skill when the user mentions memory, rules, inbox, curation, or when the task is clearly about memory/rule-system maintenance even without those exact words.
