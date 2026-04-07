@@ -30,7 +30,7 @@
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
   提供 UI 侧的显示名称、简介和默认 prompt。
 
-### 冲突与修复说明
+### 冲突与修复说明 - 涉及SKILL：Superpowers
 
 这个 skill 曾经暴露出一次与运行时发现机制有关的路径冲突：真实目录始终位于 `D:\CodexData\skills\memory-rule-curation`，但运行时一度把它暴露成了错误路径 `C:\Users\UserName\.codex\superpowers\skills\memory-rule-curation\SKILL.md`。
 
@@ -98,7 +98,7 @@ This skill is implemented through the following files:
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
   Provides UI-facing metadata such as display name, short description, and default prompt.
 
-### Conflict and remediation note
+### Conflict and remediation note - SKILL involved: Superpowers
 
 This skill previously exposed a runtime discovery-path conflict. The real skill directory always lived at `D:\CodexData\skills\memory-rule-curation`, but the runtime temporarily surfaced the wrong path `C:\Users\UserName\.codex\superpowers\skills\memory-rule-curation\SKILL.md`.
 
