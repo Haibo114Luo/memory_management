@@ -13,6 +13,7 @@
 - 从 `user correction`、`failure case`、`review feedback` 等来源识别候选记忆或候选规则。
 - 先判断“写什么、怎么记”，再判断 scope，最后才决定写入位置。
 - 保留现有全局记忆层结构，同时补充 `task-specific` 项目级记忆层。
+- 在全局长期记忆里显式区分“已完成的归档记忆”和“尚未完成、以后要续做的 TODO 分支”。
 - 为短期记忆、长期记忆、规则提供最小条目格式，减少随意记录造成的漂移。
 - 在发生实际记忆写入时，要求在回答结尾输出一条轻量摘要提示。
 - 对全局记忆和项目内 `memories` 分别执行冲突检查，避免静默覆盖。
@@ -29,6 +30,16 @@
   负责定义全局记忆目录和项目内 `memories/` 目录的结构语义。
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
   提供 UI 侧的显示名称、简介和默认 prompt。
+
+### TODO 语义
+
+这个仓库现在把 `D:\CodexData\memories\long_term_memory\TODO` 作为专门位置，用来保存**尚未完成但明确希望以后继续推进**的全局任务、维护流或设计分支。
+
+边界规则是：
+
+- `TODO/` 里只放 still-open work。
+- 已完成的内容不应继续留在 `TODO/`，而应移回普通的长期记忆主题目录。
+- 普通 `long_term_memory` 更偏向 archival / historical reference；`TODO/` 更偏向 deferred continuation。
 
 ### 冲突与修复说明 - 涉及SKILL：Superpowers
 
@@ -81,6 +92,7 @@ The skill currently provides the following behavior:
 - It identifies candidate memories or candidate rules from sources such as `user correction`, `failure case`, and `review feedback`.
 - It decides what to write and how to remember it before deciding scope and destination.
 - It preserves the existing global memory-layer structure while adding a `task-specific` project-level memory layer.
+- It explicitly separates completed archival memory from still-open global `TODO` branches that should be resumed later.
 - It defines minimal entry formats for short-term memory, long-term memory, and rules to reduce drift from ad-hoc note taking.
 - It requires a lightweight write-summary line at the end of the reply whenever an actual memory write happens.
 - It applies conflict checks separately inside the global memory layers and inside project-local `memories`, preventing silent overwrites.
@@ -97,6 +109,16 @@ This skill is implemented through the following files:
   Defines the meaning of the global memory layout and the project-local `memories/` layout.
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
   Provides UI-facing metadata such as display name, short description, and default prompt.
+
+### TODO semantics
+
+This repository now treats `D:\CodexData\memories\long_term_memory\TODO` as the dedicated location for **still-open global work** that the user explicitly wants to resume later, such as deferred maintenance streams or unfinished design branches.
+
+The boundary is:
+
+- `TODO/` should contain only still-open work.
+- Once a branch is completed, it should no longer stay in `TODO/`; it should be moved or rewritten into a normal long-term-memory topic directory.
+- Ordinary `long_term_memory` is for archival or historical reference, while `TODO/` is for deferred continuation.
 
 ### Conflict and remediation note - SKILL involved: Superpowers
 
