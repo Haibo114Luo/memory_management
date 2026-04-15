@@ -7,7 +7,7 @@ description: Use when Codex is handling corrections, failures, review feedback, 
 
 ## Overview
 
-Use this skill to decide what should be remembered, how it should be remembered, and only then where it should live. Keep the existing global split between active rules, archived memory, and candidate rule intake. Add a task-specific layer only when the memory applies to the current project rather than to the machine-wide defaults. Keep `D:\CodexData\AGENTS.md` small, keep operational rules under `D:\CodexData\memories\rules`, and keep historical or low-frequency material out of the active instruction layer.
+Use this skill to decide what should be remembered, how it should be remembered, and only then where it should live. Keep the existing global split between active rules, archived memory, deferred TODO branches, and candidate rule intake. Add a task-specific layer only when the memory applies to the current project rather than to the machine-wide defaults. Keep `D:\CodexData\AGENTS.md` small, keep operational rules under `D:\CodexData\memories\rules`, keep unfinished global work under `D:\CodexData\memories\long_term_memory\TODO`, and keep historical or low-frequency material out of the active instruction layer.
 
 ## Quick Start
 
@@ -23,6 +23,7 @@ Use this skill to decide what should be remembered, how it should be remembered,
 - Treat `D:\CodexData\memories\short_term_memory` as an inbox for candidate rules and temporary memory-management notes. It is not a default authoritative source.
 - Treat `D:\CodexData\memories\rules` as curated operational guidance that can be loaded for relevant tasks.
 - Treat `D:\CodexData\memories\long_term_memory` as archival reference material that is only searched when the user explicitly asks to recall or search memory.
+- Treat `D:\CodexData\memories\long_term_memory\TODO` as the reserved location for global unfinished branches, deferred maintenance items, and planned work the user wants resumed later. Keep only still-open work there.
 - When this skill writes to `short_term_memory`, `long_term_memory`, `rules`, or `AGENTS.md`, write the file content in English. If the source material is in another language, translate or paraphrase it into concise English instead of copying non-English prose into the write target.
 - Preserve the existing global layers as-is. Only add a `task-specific` layer when the memory is local to the current Codex conversation's project and should not become machine-wide guidance.
 - Do not use `D:\CodexData\rules\default.rules` for memory or instruction curation. That path is reserved for other runtime rule machinery.
@@ -39,10 +40,11 @@ Use this skill to decide what should be remembered, how it should be remembered,
 
 ### 2. Decide what to remember and how to remember it
 
-- Determine whether the new information is a candidate rule, a stable operational rule, an archival reference, or a structural change to the memory system itself.
+- Determine whether the new information is a candidate rule, a stable operational rule, an archival reference, a deferred TODO branch, or a structural change to the memory system itself.
 - If the information is a one-off correction, a fresh observation, or still needs judgment, treat it as a candidate first.
 - If the information is stable, repeatedly useful, and should guide future work, treat it as an operational rule.
 - If the information is mainly historical context, investigation notes, or low-frequency background, treat it as archival memory.
+- If the information describes unfinished work that should be resumed later, treat it as TODO memory until the branch is completed.
 - Write the memory as compact, execution-oriented guidance. Do not start from the filesystem layout and work backward into meaning.
 - Use the smallest entry format that still preserves meaning. Do not create custom fields unless the current task clearly needs them.
 
@@ -59,7 +61,8 @@ Use this skill to decide what should be remembered, how it should be remembered,
 
 - For global-scope candidate rules, append uncurated entries to `D:\CodexData\memories\short_term_memory\rule-inbox.md`.
 - For global-scope operational rules, write stable guidance into `D:\CodexData\memories\rules\index.md` or the relevant topic file under `D:\CodexData\memories\rules`.
-- For global-scope archival references, write into `D:\CodexData\memories\long_term_memory`.
+- For global-scope unfinished branches or deferred work, write into `D:\CodexData\memories\long_term_memory\TODO`.
+- For global-scope archival references, write into the appropriate topic directory under `D:\CodexData\memories\long_term_memory`.
 - For task-specific memory, create a `memories` folder at the current project root when it does not already exist, but only after confirming that the current working directory obviously is the project root or the user has confirmed the target root.
 - Update `D:\CodexData\AGENTS.md` only when a small always-on trigger, scope rule, or entry-point rule genuinely belongs in the active prompt layer.
 - Use topic directories inside long-term memory by default instead of dropping archival files directly at the root.
@@ -74,7 +77,7 @@ Use this skill to decide what should be remembered, how it should be remembered,
 
 - Use `D:\CodexData\memories\rules\index.md` as the default entry point.
 - Default to candidate-first handling. Do not promote a new candidate from `rule-inbox.md` into curated rules until it has appeared in at least two independent triggers, unless it is a low-dispute machine/environment or structure rule that is clearly stable enough for direct promotion.
-- For low-dispute machine/environment or structure rules, direct promotion is allowed. For style, workflow, abstraction, or governance rules, ask the user before promoting even if the recurrence threshold has been met.
+- For low-dispute machine/environment or structure rules, direct promotion is allowed. For style, workflow, abstraction, or governance rules, ask the user before promotion even if the recurrence threshold has been met.
 - Add a new topic file only when the rule area is coherent, likely to grow, and no existing topic file is the better home. Prefer reusing an existing topic file when the new rule comfortably fits there.
 - Keep topic files execution-oriented. Do not paste long debugging timelines or historical narratives into curated rule files.
 
@@ -100,7 +103,8 @@ Use this skill to decide what should be remembered, how it should be remembered,
 
 - If the user says "Whenever I correct a recurring environment mistake, capture it for later review," label the source as `user correction` and append a candidate entry to `D:\CodexData\memories\short_term_memory\rule-inbox.md` first.
 - If the same environment constraint appears in two independent triggers and should guide future tasks across projects, move or rewrite it into the relevant curated rule file under `D:\CodexData\memories\rules`.
-- If the user asks to preserve an investigation writeup for future recall, place it under `D:\CodexData\memories\long_term_memory` instead of the curated rules set.
+- If the user asks to preserve an investigation writeup for future recall, place it under the appropriate topic directory in `D:\CodexData\memories\long_term_memory` instead of the curated rules set.
+- If the user asks to preserve a deferred maintenance stream or unfinished branch for later continuation, place it under `D:\CodexData\memories\long_term_memory\TODO` until the work is completed.
 - If a failure pattern applies only to the current project, create project-local `memories` at that project's root and store it in the task-specific layer rather than polluting the global memory tree.
 - If a proposed curated rule conflicts with an existing AGENTS rule or another curated rule, log the conflict in `rule-inbox.md` and ask the user to decide before changing the long-term rule set.
 

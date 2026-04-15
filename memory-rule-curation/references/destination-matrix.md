@@ -15,7 +15,7 @@ Use this matrix only after deciding what should be remembered and whether the me
 
 ## Minimal entry formats
 
-Use the same minimal format for both short-term memory and long-term memory:
+Use the same minimal format for both short-term memory and long-term memory, including `TODO` entries:
 
 - `Date`
 - `Source Type`
@@ -35,8 +35,9 @@ Rules for all formats:
 
 - Keep each entry focused on one point only.
 - Keep entries compact and execution-oriented.
+- Write all entry content in English. If the triggering conversation or source evidence is in another language, translate or paraphrase it into concise English for the stored record instead of copying non-English prose.
 - Use the same format for task-specific memory; only the destination path changes.
-- Prefer `Rule` for curated guidance and `Memory` for candidate or archival material.
+- Prefer `Rule` for curated guidance and `Memory` for candidate, TODO, or archival material.
 - Do not add extra fields by default. Add one only when the current task genuinely needs it.
 
 ## Send to `short_term_memory`
@@ -51,6 +52,17 @@ Choose `D:\CodexData\memories\short_term_memory\rule-inbox.md` when:
 Use the shared memory-entry format above.
 Use `Source Type` values such as `user correction`, `failure case`, `review feedback`, or `other`.
 If the current task needs a routing hint, add `Suggested Destination` as an extra field. Do not add it by default.
+
+## Send to `TODO`
+
+Choose `D:\CodexData\memories\long_term_memory\TODO` when:
+
+- the material describes unfinished work the user wants resumed later
+- the note is a deferred maintenance stream, design branch, or planned follow-up task
+- the work is still open, so it should not yet be filed as completed archival memory
+
+Use the shared memory-entry format above.
+When a TODO branch is completed, move or rewrite it into a more appropriate non-TODO topic directory under `D:\CodexData\memories\long_term_memory`.
 
 ## Send to `rules`
 
@@ -68,11 +80,12 @@ Prefer reusing an existing topic file. Create a new topic file only when the new
 
 ## Send to `long_term_memory`
 
-Choose `D:\CodexData\memories\long_term_memory` when:
+Choose a non-TODO topic directory under `D:\CodexData\memories\long_term_memory` when:
 
 - the material is mainly archival or investigative
 - it is useful for future recall but not something that should load by default
 - the content explains history, context, evidence, or background rather than current execution rules
+- the work is already completed and should no longer live in `TODO`
 
 Use the shared memory-entry format above.
 

@@ -9,6 +9,8 @@ Keep this global structure unchanged. Add a project-local `task-specific` memory
 ```text
 D:\CodexData\memories\
   long_term_memory\
+    TODO\
+      index.md
     debug_history\
       ai-readable-debug-log.md
   short_term_memory\
@@ -39,7 +41,8 @@ Default to the current working directory only when it obviously looks like the p
 ## Path Semantics
 
 - `D:\CodexData\memories\long_term_memory` stores archival, low-frequency reference material that should only be searched when the user explicitly asks to recall or search memory.
-- Organize `D:\CodexData\memories\long_term_memory` by topic directories by default, such as `debug_history`, instead of treating the root as the main filing surface.
+- `D:\CodexData\memories\long_term_memory\TODO` stores global unfinished branches, deferred maintenance streams, and planned work the user wants resumed later.
+- Organize completed archival material inside topic directories under `D:\CodexData\memories\long_term_memory`, such as `debug_history`, instead of treating the root as the main filing surface.
 - `D:\CodexData\memories\short_term_memory` stores candidate rules and temporary memory-management notes that still require curation.
 - `D:\CodexData\memories\rules` stores curated operational guidance that may be read for relevant tasks.
 - `D:\CodexData\memories\rules\index.md` is the default entry point for the curated rules set.
