@@ -1,6 +1,6 @@
 # Destination Matrix
 
-Use this matrix only after deciding what should be remembered and whether the memory is global or task-specific.
+Use this matrix only after deciding what should be preserved and whether it is global or task-specific.
 
 ## Scope first
 
@@ -13,81 +13,58 @@ Use this matrix only after deciding what should be remembered and whether the me
   - `memories\long_term_memory`
   - `memories\rules`
 
-## Minimal entry formats
+## Format discipline by destination
 
-Use the same minimal format for both short-term memory and long-term memory, including `TODO` entries:
+Use entry-style records only for candidate, TODO, and archival memory. These records may include compact fields such as `Date`, `Source Type`, `Trigger`, `Memory`, and `Why` when those fields preserve recall value.
 
-- `Date`
-- `Source Type`
-- `Trigger`
-- `Memory`
-- `Why`
+Do not use entry-style records for curated rules. Files under `D:\CodexData\memory_manual\rules` are discipline documents, not a collection of stories about how each rule was discovered. Curated rules should be rewritten as stable, generalized, operational guidance with clear scope, boundaries, and execution instructions. They should avoid one-correction-per-entry structure, excessive provenance, debugging timelines, or behavior logs. Mention history only when it is necessary to define the rule boundary.
 
-Use this minimal format for curated rules:
-
-- `Date`
-- `Source Type`
-- `Trigger`
-- `Rule`
-- `Why`
-
-Rules for all formats:
-
-- Keep each entry focused on one point only.
-- Keep entries compact and execution-oriented.
-- Write all entry content in English. If the triggering conversation or source evidence is in another language, translate or paraphrase it into concise English for the stored record instead of copying non-English prose.
-- Use the same format for task-specific memory; only the destination path changes.
-- Prefer `Rule` for curated guidance and `Memory` for candidate, TODO, or archival material.
-- Do not add extra fields by default. Add one only when the current task genuinely needs it.
+All stored content should be written in English. If the triggering conversation or source evidence is in another language, translate or paraphrase the durable point instead of copying non-English prose into the write target.
 
 ## Send to `short_term_memory`
 
-Choose `D:\CodexData\memories\short_term_memory\rule-inbox.md` when:
+Choose `D:\CodexData\memory_manual\short_term_memory\rule-inbox.md` when:
 
 - the rule is still a candidate
 - the information came from a fresh correction or one-off mistake
 - the correct long-term destination is not settled yet
 - the note is operationally interesting but not yet stable enough for curated rules
 
-Use the shared memory-entry format above.
-Use `Source Type` values such as `user correction`, `failure case`, `review feedback`, or `other`.
-If the current task needs a routing hint, add `Suggested Destination` as an extra field. Do not add it by default.
+Use a compact candidate entry format that preserves provenance for later curation. Candidate entries may include `Date`, `Source Type`, `Trigger`, `Candidate Rule`, `Why`, `Suggested Destination`, `Status`, and `Evidence Summary` when useful. Keep each candidate focused and concise.
 
 ## Send to `TODO`
 
-Choose `D:\CodexData\memories\long_term_memory\TODO` when:
+Choose `D:\CodexData\memory_manual\long_term_memory\TODO` when:
 
 - the material describes unfinished work the user wants resumed later
 - the note is a deferred maintenance stream, design branch, or planned follow-up task
 - the work is still open, so it should not yet be filed as completed archival memory
 
-Use the shared memory-entry format above.
-When a TODO branch is completed, move or rewrite it into a more appropriate non-TODO topic directory under `D:\CodexData\memories\long_term_memory`.
+Use a compact entry format. When a TODO branch is completed, move or rewrite it into a more appropriate non-TODO root-level topic file under `D:\CodexData\memory_manual\long_term_memory`, or into an indexed collection directory only if the topic genuinely needs multiple files.
 
 ## Send to `rules`
 
-Choose `D:\CodexData\memories\rules` when:
+Choose `D:\CodexData\memory_manual\rules` when:
 
-- the rule is stable and repeatedly useful
+- the guidance is stable and repeatedly useful
 - the guidance should shape future tasks on this machine
-- the content is execution-oriented rather than historical
+- the content is operational discipline rather than historical context
 - the rule fits an existing topic file or justifies a new coherent topic file
 
-Keep `index.md` short and use it as the entry point. Put detailed operational content in topic files.
-Default to candidate-first handling: promote only after at least two independent triggers unless the rule is a low-dispute machine/environment or structure rule that is clearly stable enough for direct promotion.
-For style, workflow, abstraction, or governance rules, ask the user before promotion even when the recurrence threshold has been met.
-Prefer reusing an existing topic file. Create a new topic file only when the new area has a clear boundary and is likely to grow.
+Keep `index.md` short and use it as the entry point. Put operational detail in topic files. Topic files should be organized by responsibility and should read like instructions a future agent can follow directly. Prefer sections such as scope, gate conditions, boundaries, required behavior, and verification discipline. Do not encode each user correction as its own permanent rule entry.
+
+Default to candidate-first handling: promote only after at least two independent triggers unless the rule is a low-dispute machine/environment or structure rule that is clearly stable enough for direct promotion. For style, workflow, abstraction, or governance rules, ask the user before promotion even when the recurrence threshold has been met. Prefer reusing an existing topic file. Create a new topic file only when the new area has a clear boundary and is likely to grow.
 
 ## Send to `long_term_memory`
 
-Choose a non-TODO topic directory under `D:\CodexData\memories\long_term_memory` when:
+Choose a root-level topic file under `D:\CodexData\memory_manual\long_term_memory` when:
 
 - the material is mainly archival or investigative
 - it is useful for future recall but not something that should load by default
 - the content explains history, context, evidence, or background rather than current execution rules
 - the work is already completed and should no longer live in `TODO`
 
-Use the shared memory-entry format above.
+Use compact entry-style archival records when provenance matters. If a new root-level topic file is created, added, renamed, or removed, update `D:\CodexData\memory_manual\long_term_memory\index.md` in the same edit set. Do not create a new subdirectory just because a new topic appears. A new `*.md` topic file at the long-term memory root is acceptable governance. Create subdirectories only for live queues, debug/incident logs, indexed multi-file collections, or domains clearly expected to grow.
 
 ## Send to `AGENTS.md`
 
@@ -112,12 +89,12 @@ If no memory write happened, do not print this line.
 Treat conflicts across all three layers as blocking:
 
 - `D:\CodexData\AGENTS.md`
-- existing files under `D:\CodexData\memories\rules`
+- existing files under `D:\CodexData\memory_manual\rules`
 - the candidate or proposed rule being considered
 
 When a conflict appears:
 
-1. Append a conflict entry to `D:\CodexData\memories\short_term_memory\rule-inbox.md`.
+1. Append a conflict entry to `D:\CodexData\memory_manual\short_term_memory\rule-inbox.md`.
 2. Do not auto-resolve, auto-overwrite, or silently choose a winner.
 3. Ask the user to decide which rule should win or how the rules should be rewritten.
 

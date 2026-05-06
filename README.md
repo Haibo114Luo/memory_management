@@ -14,7 +14,7 @@
 - 先判断“写什么、怎么记”，再判断 scope，最后才决定写入位置。
 - 保留现有全局记忆层结构，同时补充 `task-specific` 项目级记忆层。
 - 在全局长期记忆里显式区分“已完成的归档记忆”和“尚未完成、以后要续做的 TODO 分支”。
-- 为短期记忆、长期记忆、规则提供最小条目格式，减少随意记录造成的漂移。
+- 为候选记忆、长期归档、TODO 和 curated rules 提供 destination-specific format discipline，减少随意记录造成的漂移。
 - 在发生实际记忆写入时，要求在回答结尾输出一条轻量摘要提示。
 - 对全局记忆和项目内 `memories` 分别执行冲突检查，避免静默覆盖。
 
@@ -25,7 +25,7 @@
 - [`memory-rule-curation/SKILL.md`](./memory-rule-curation/SKILL.md)
   负责定义 skill 的触发条件、总体原则、工作流和冲突处理规则。
 - [`memory-rule-curation/references/destination-matrix.md`](./memory-rule-curation/references/destination-matrix.md)
-  负责定义“什么内容该写到哪里”、最小条目格式，以及 task-specific 与全局层的分流规则。
+  负责定义“什么内容该写到哪里”、destination-specific 格式纪律，以及 task-specific 与全局层的分流规则。
 - [`memory-rule-curation/references/memory-layout.md`](./memory-rule-curation/references/memory-layout.md)
   负责定义全局记忆目录和项目内 `memories/` 目录的结构语义。
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
@@ -33,7 +33,7 @@
 
 ### TODO 语义
 
-这个仓库现在把 `D:\CodexData\memories\long_term_memory\TODO` 作为专门位置，用来保存**尚未完成但明确希望以后继续推进**的全局任务、维护流或设计分支。
+这个仓库现在把 `D:\CodexData\memory_manual\long_term_memory\TODO` 作为专门位置，用来保存**尚未完成但明确希望以后继续推进**的全局任务、维护流或设计分支。
 
 边界规则是：
 
@@ -66,7 +66,7 @@
 例如：
 
 - `D:\CodexData\AGENTS.md` 应替换为你的 Agent app 根目录下的 `AGENTS.md`
-- `D:\CodexData\memories` 应替换为你的 Agent app 根目录下的 `memories`
+- `D:\CodexData\memory_manual` 应替换为你的 Agent app 根目录下的 `memories`
 - 其他以 `D:\CodexData` 开头的路径也应按同样方式替换
 
 如果你的 Agent app 根目录不是 Windows 路径，或者目录结构不同，你还需要同步调整 references 中的目录示例和相关说明。
@@ -93,7 +93,7 @@ The skill currently provides the following behavior:
 - It decides what to write and how to remember it before deciding scope and destination.
 - It preserves the existing global memory-layer structure while adding a `task-specific` project-level memory layer.
 - It explicitly separates completed archival memory from still-open global `TODO` branches that should be resumed later.
-- It defines minimal entry formats for short-term memory, long-term memory, and rules to reduce drift from ad-hoc note taking.
+- It defines destination-specific format discipline for candidates, archival memory, TODO branches, and curated rules to reduce drift from ad-hoc note taking.
 - It requires a lightweight write-summary line at the end of the reply whenever an actual memory write happens.
 - It applies conflict checks separately inside the global memory layers and inside project-local `memories`, preventing silent overwrites.
 
@@ -104,7 +104,7 @@ This skill is implemented through the following files:
 - [`memory-rule-curation/SKILL.md`](./memory-rule-curation/SKILL.md)
   Defines the triggering conditions, core principles, workflow, and conflict-handling rules.
 - [`memory-rule-curation/references/destination-matrix.md`](./memory-rule-curation/references/destination-matrix.md)
-  Defines routing rules, minimal entry formats, and the split between task-specific and global memory.
+  Defines routing rules, destination-specific format discipline, and the split between task-specific and global memory.
 - [`memory-rule-curation/references/memory-layout.md`](./memory-rule-curation/references/memory-layout.md)
   Defines the meaning of the global memory layout and the project-local `memories/` layout.
 - [`memory-rule-curation/agents/openai.yaml`](./memory-rule-curation/agents/openai.yaml)
@@ -112,7 +112,7 @@ This skill is implemented through the following files:
 
 ### TODO semantics
 
-This repository now treats `D:\CodexData\memories\long_term_memory\TODO` as the dedicated location for **still-open global work** that the user explicitly wants to resume later, such as deferred maintenance streams or unfinished design branches.
+This repository now treats `D:\CodexData\memory_manual\long_term_memory\TODO` as the dedicated location for **still-open global work** that the user explicitly wants to resume later, such as deferred maintenance streams or unfinished design branches.
 
 The boundary is:
 
@@ -145,7 +145,7 @@ Important: this skill currently contains hardcoded paths for my local environmen
 For example:
 
 - Replace `D:\CodexData\AGENTS.md` with the `AGENTS.md` path under your own Agent app root.
-- Replace `D:\CodexData\memories` with the `memories` directory under your own Agent app root.
+- Replace `D:\CodexData\memory_manual` with the `memories` directory under your own Agent app root.
 - Replace any other path starting with `D:\CodexData` in the same way.
 
 If your Agent app root is not a Windows path, or if your directory layout differs, you should also adjust the directory examples and related reference text accordingly.
@@ -157,3 +157,4 @@ If your Agent app root is not a Windows path, or if your directory layout differ
 - The path-conflict issue now has a written incident record and remediation note in [`CONFLICT.md`](./CONFLICT.md).
 - Public-facing documentation now anonymizes the personal username as `UserName`.
 - It has not yet been fully generalized into a plug-and-play skill for other users.
+
